@@ -1,7 +1,7 @@
 function [ output_args ] = judge_ma_rule1(t, price,days_average,down_length, horizontal_length,scale)
-%UNTITLED7 ´Ë´¦ÏÔÊ¾ÓÐ¹Ø´Ëº¯ÊýµÄÕªÒª
-%   °´ÕÕ¹æÔò1½øÐÐÅÐ¶ÏÊÇ²»ÊÇÂòÈëµã
-label=0;%³õÊ¼±ê¼ÇÐÅºÅ²»Ã÷È·
+%UNTITLED7 æ­¤å¤„æ˜¾ç¤ºæœ‰å…³æ­¤å‡½æ•°çš„æ‘˜è¦
+%   æŒ‰ç…§è§„åˆ™1è¿›è¡Œåˆ¤æ–­æ˜¯ä¸æ˜¯ä¹°å…¥ç‚¹
+label=0;%åˆå§‹æ ‡è®°ä¿¡å·ä¸æ˜Žç¡®
 cout_down=0;
 cout_horizontal=0;
 while(t>0):

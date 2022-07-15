@@ -1,5 +1,5 @@
-%% zz500Êı¾İ·Å»·¾³ÏÂ£¬Ö±½ÓÔËĞĞ£¬¸ù¾İ¸ñÀ¼Î¬¶û·¨ÔòÅĞ±ğÂòÈëÂô³öµã
-format short g£»
+%% zz500æ•°æ®æ”¾ç¯å¢ƒä¸‹ï¼Œç›´æ¥è¿è¡Œï¼Œæ ¹æ®æ ¼å…°ç»´å°”æ³•åˆ™åˆ¤åˆ«ä¹°å…¥å–å‡ºç‚¹
+format short gï¼›
 format bank
 
 % zz500 = csvread('D:\Quantitative investment data\data2.csv',1,0);
@@ -17,13 +17,13 @@ day_length=length(days);
 days_average=zeros(day_length,1);
 
 for i=20:day_length
-    days_average(i)=(twenty_days_avg(price(i-19:i))); %¼ÆËã¶şÊ®ÈÕ¾ùÏß
+    days_average(i)=(twenty_days_avg(price(i-19:i))); %è®¡ç®—äºŒåæ—¥å‡çº¿
 end
 label=zeros(1,day_length);
 for i=20:day_length
-    [label(i),label_type(i,:)]=judge_invest_dot_with_ma(i,label,days,price(1:i),days_average(1:i));%ÅĞ¶ÏÊÇ·ñÊÇÂòÈëµã£¬Âô³öµã
+    [label(i),label_type(i,:)]=judge_invest_dot_with_ma(i,label,days,price(1:i),days_average(1:i));%åˆ¤æ–­æ˜¯å¦æ˜¯ä¹°å…¥ç‚¹ï¼Œå–å‡ºç‚¹
 end
-%%  »æÍ¼
+%%  ç»˜å›¾
 figure(1)
 subplot(2,1,1)
 hold on;
@@ -39,7 +39,7 @@ for i=1:day_length
 end
 legend([line1,line2,dot1,dot2],'Close price','Twenty-days-average','Buying point','Sell point');
 
-%% ½øĞĞ»Ø²â
+%% è¿›è¡Œå›æµ‹
 money=10000000;
 hold_p=0;
 for i=1:day_length
@@ -50,7 +50,7 @@ for i=1:day_length
         tmp=(money-mod(money,price(i)*100))/(price(i)*100);
         tmp=(tmp-mod(tmp,3))/3;
         if(tmp~=0)
-            disp('ÂòÈëÊÖÊı£¬¼ÛÎ»');
+            disp('ä¹°å…¥æ‰‹æ•°ï¼Œä»·ä½');
             tmp,price(i)
         end
         hold_p=hold_p+tmp;
@@ -59,15 +59,15 @@ for i=1:day_length
         tmp=(hold_p-mod(hold_p,3))/3;
         money=money+tmp*price(i)*100;
         if(hold_p~=0)
-            disp('Âô³öÊÖÊı,¼ÛÎ»');
+            disp('å–å‡ºæ‰‹æ•°,ä»·ä½');
             tmp,price(i)
         end
         hold_p=hold_p-tmp;
     end
 end
 
-%% Êä³ö»Ø²âÖ¸±ê
-disp('×îÖÕ×Ê²ú')
+%% è¾“å‡ºå›æµ‹æŒ‡æ ‡
+disp('æœ€ç»ˆèµ„äº§')
 money+hold_p*price(day_length)*100
 subplot(2,1,2);
 plot(days(20:day_length),money_time(20:day_length));
@@ -82,28 +82,28 @@ for i=1:day_length
         draw_down(i,j)=(money_time(i)-money_time(j))/money_time(i);
     end
 end
-disp('ÆÚ¼äÓ¯ÀûÂÊ£º')
+disp('æœŸé—´ç›ˆåˆ©ç‡ï¼š')
 rate=(money+hold_p*price(day_length)*100-10000000)/10000000
-disp('×î´ó»Ø³·')
+disp('æœ€å¤§å›æ’¤')
 max(max(draw_down))
-disp('Äê»¯ÊÕÒæÂÊ')
+disp('å¹´åŒ–æ”¶ç›Šç‡')
 format long
 exp(365*log(1+rate)/(days(day_length)-days(1)))-1
-disp('ÀÛ´´ĞÂ¸ßÌìÊı')
+disp('ç´¯åˆ›æ–°é«˜å¤©æ•°')
 cout
 profit=money_time-10000000;
 profit_rate=profit/10000000;
-disp('ÏÄÆÕ±È')
+disp('å¤æ™®æ¯”')
 (rate)/(std(profit_rate))
-%% ±íÃ÷Ã¿¸öĞÅºÅµãËùÊô¹æÔò
+%% è¡¨æ˜æ¯ä¸ªä¿¡å·ç‚¹æ‰€å±è§„åˆ™
 figure(2)
 subplot(2,2,1);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,1)==1)
         dot_1=plot(days(i),price(i),'r*');
     end
@@ -113,10 +113,10 @@ legend([line1,line2,dot_1],'Close price','Twenty-days-average','Buying rule1');
 subplot(2,2,2);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,2)==1)
         dot_1=plot(days(i),price(i),'r*');
     end
@@ -126,10 +126,10 @@ legend([line1,line2,dot_1],'Close price','Twenty-days-average','Buying rule2');
 subplot(2,2,3);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,3)==1)
         dot_1=plot(days(i),price(i),'r*');
     end
@@ -139,10 +139,10 @@ legend([line1,line2,dot_1],'Close price','Twenty-days-average','Buying rule3');
 subplot(2,2,4);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,4)==1)
         dot_1=plot(days(i),price(i),'r*');
     end
@@ -153,10 +153,10 @@ figure(3)
 subplot(2,2,1);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,5)==-1)
         dot_2=plot(days(i),price(i),'g*');
     end
@@ -166,10 +166,10 @@ legend([line1,line2,dot_2],'Close price','Twenty-days-average','Sell rule1');
 subplot(2,2,2);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,6)==-1)
         dot_2=plot(days(i),price(i),'g*');
     end
@@ -179,10 +179,10 @@ legend([line1,line2,dot_2],'Close price','Twenty-days-average','Sell rule2');
 subplot(2,2,3);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,7)==-1)
         dot_2=plot(days(i),price(i),'g*');
     end
@@ -192,10 +192,10 @@ legend([line1,line2,dot_2],'Close price','Twenty-days-average','Sell rule3');
 subplot(2,2,4);
 hold on;
 grid on;
-line1=plot(days(20:day_length),price(20:day_length));%×÷Ã¿ÈÕÊÕÅÌ¼ÛÍ¼Ïñ
-line2=plot(days(20:day_length),days_average(20:day_length),'k--');%×÷¶şÊ®ÈÕ¾ùÏßÍ¼Ïñ
+line1=plot(days(20:day_length),price(20:day_length));%ä½œæ¯æ—¥æ”¶ç›˜ä»·å›¾åƒ
+line2=plot(days(20:day_length),days_average(20:day_length),'k--');%ä½œäºŒåæ—¥å‡çº¿å›¾åƒ
 money_time=zeros(day_length,1);
-for i=1:day_length %¸ù¾İĞÅºÅµã£¬±ê³öÂòÈëµãÂô³öµã
+for i=1:day_length %æ ¹æ®ä¿¡å·ç‚¹ï¼Œæ ‡å‡ºä¹°å…¥ç‚¹å–å‡ºç‚¹
     if(label_type(i,8)==-1)
         dot_2=plot(days(i),price(i),'g*');
     end

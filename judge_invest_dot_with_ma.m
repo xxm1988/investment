@@ -1,6 +1,6 @@
 function [ label,label_type] =  judge_invest_dot_with_ma(t,label0,days, price,days_average)
-%UNTITLED6 ´Ë´¦ÏÔÊ¾ÓĞ¹Ø´Ëº¯ÊıµÄÕªÒª
-%   ÅĞ¶Ïµ±Ç°Ê±¼ätÊÇ·ñÊÇÂòÈëµã»òÕßÂô³öµã£¬Êä³öÂòÂôĞÅºÅ
+%UNTITLED6 æ­¤å¤„æ˜¾ç¤ºæœ‰å…³æ­¤å‡½æ•°çš„æ‘˜è¦
+%   åˆ¤æ–­å½“å‰æ—¶é—´tæ˜¯å¦æ˜¯ä¹°å…¥ç‚¹æˆ–è€…å–å‡ºç‚¹ï¼Œè¾“å‡ºä¹°å–ä¿¡å·
 label=0;
 label1=judge_ma_rule1(t, price,days_average,2,3,0.0005,0.00094);
 label2=judge_ma_rule2(t, price,days_average,3,20,0.04);
@@ -16,9 +16,9 @@ end
 if((label5==-1)||(label6==-1)||(label7==-1)||(label8==-1))
     label=-1;
 end
-if (price(t)/days_average(t)>1.05)%¹É¼ÛÆ«Àë¾ùÏß³Ì¶È¹ı´óÊ±£¬²»½øĞĞ²Ù×÷
+if (price(t)/days_average(t)>1.05)%è‚¡ä»·åç¦»å‡çº¿ç¨‹åº¦è¿‡å¤§æ—¶ï¼Œä¸è¿›è¡Œæ“ä½œ
     label=0;
-elseif(price(t)/days_average(t)<0.95)%¹É¼ÛÆ«Àë¾ùÏß³Ì¶È¹ı´óÊ±£¬²»½øĞĞ²Ù×÷
+elseif(price(t)/days_average(t)<0.95)%è‚¡ä»·åç¦»å‡çº¿ç¨‹åº¦è¿‡å¤§æ—¶ï¼Œä¸è¿›è¡Œæ“ä½œ
     label=-0;
 end
 if (label==1||label==-1)

@@ -1,6 +1,6 @@
 function [mean ] =twenty_days_avg( a1)
-%UNTITLED3 此处显示有关此函数的摘要
-%   输入五天的收盘价，取平均
+%UNTITLED3 姝ゅ鏄剧ず鏈夊叧姝ゅ嚱鏁扮殑鎽樿
+%   杈撳叆浜斿ぉ鐨勬敹鐩樹环锛屽彇骞冲潎
 mean=sum(a1(1:20))/20;
 
 end
